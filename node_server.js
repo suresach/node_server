@@ -3,6 +3,7 @@ const url = require('url');
 const querystring = require('querystring');
 const JsonSocket = require('json-socket');
 
+//three objects for specified storage
 var conn_and_time_out = {};
 var conn_and_time_expire = {};
 var conn_and_socket = {};
@@ -16,6 +17,7 @@ function timeout_func(socket, conn_id, time_out) {
 }
 
 function add_new_connection(socket, connId) {
+    //send function and delete storage
     socket.sendEndMessage({ 'status': 'ok' });
     delete conn_and_time_out[connId];
     delete conn_and_time_expire[connId];
@@ -86,7 +88,6 @@ var server = net.createServer(function(socket) {
             }
         }
     });
-    // socket.pipe(socket);
 });
 
 server.listen(1337, 'localhost');
